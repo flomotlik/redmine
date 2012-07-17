@@ -1,10 +1,10 @@
 require 'redmine'
 require 'issue_colors_patch'
 
-Redmine::Plugin.register :issue_colors do
-  name 'Issue Colors plugin'
+Redmine::Plugin.register :greentube do
+  name 'Greentube plugin'
   author 'Florian Motlik'
-  description 'This plugin provides Issue Coloring according to inhouse rules'
+  description 'This plugin provides All customisations used inhouse by Greentube'
   version '0.0.1'
   url 'https://github.com/greentube/redmine'
   author_url 'https://github.com/greentube/redmine'
