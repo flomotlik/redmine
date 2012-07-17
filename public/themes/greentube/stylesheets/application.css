@@ -1,0 +1,25 @@
+@import url(../../alternate/stylesheets/application.css);
+
+.overdue{
+  background-color:#FF5050;
+}
+
+.critical{
+  background-color:#FF8080;
+}
+
+.alert{
+ background-color:#FF9000;
+}
+
+.problematic{
+ background-color:#FFCC00;
+}
+
+.ok {
+ background-color:#CFFF00;
+}
+
+.fine{
+ background-color:#99FF00;
+}
