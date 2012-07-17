@@ -1,5 +1,6 @@
 require 'redmine'
 require 'issue_colors_patch'
+require 'relative_time_patch'
 
 Redmine::Plugin.register :greentube do
   name 'Greentube plugin'
@@ -8,6 +9,9 @@ Redmine::Plugin.register :greentube do
   version '0.0.1'
   url 'https://github.com/greentube/redmine'
   author_url 'https://github.com/greentube/redmine'
+  requires_redmine :version_or_higher => '2.0.0'
 end
 
+BusinessTime::Config.beginning_of_workday = "10:00 am"
+BusinessTime::Config.end_of_workday = "6:00 pm"
 Holidays.between(Date.civil(2012, 1, 1), 3.years.from_now, :at).map{|holiday| BusinessTime::Config.holidays << holiday[:date]}
