@@ -1,0 +1,22 @@
+<h3><%= l(:queries_for_my_projects) %></h3>
+<table class="list">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Project</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% queries = Query.where("user_id = ? OR (project_id IN (?) AND is_public = ?)", User.current.id, User.current.memberships.collect(&:project_id), true) %>
+    <% queries.group_by{|q| q.project.name}.sort.each do |project_queries| %>
+      <% project_queries.last.sort_by{|q| q.name.downcase}.each do |query| %>
+        <tr class="issue">
+          <td><%= link_to query.id, edit_query_path(query) %></td>
+          <td><%= link_to query.project.name, query.project %></td>
+          <td><%= link_to query.name, project_issues_path(query.project, :query_id => query) %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

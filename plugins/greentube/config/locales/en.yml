@@ -1,3 +1,4 @@
 # English strings go here for Rails i18n
 en:
   field_workdays_left: 'Workdays left'
+  queries_for_my_projects: Queries for your projects
