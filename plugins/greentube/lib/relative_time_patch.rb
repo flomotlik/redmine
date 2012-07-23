@@ -6,7 +6,7 @@ end
 
 module QueryRelativeTimePatch
   def self.included(base)
-    base.add_available_column(QueryColumn.new(:workdays_left, :sortable => "#{Issue.table_name}.due_date"))
+    base.add_available_column(QueryColumn.new(:workdays_left, :sortable => "case when #{Issue.table_name}.due_date is NULL then 1 else 0 end, #{Issue.table_name}.due_date"))
   end
 end
 
