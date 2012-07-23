@@ -1,25 +1,25 @@
 @import url(../../alternate/stylesheets/application.css);
 
-.overdue{
+.gt_overdue .due_date, .gt_overdue .id {
   background-color:#FF5050;
 }
 
-.critical{
+.gt_critical .due_date .gt_critical .id{
   background-color:#FF8080;
 }
 
-.alert{
+.gt_warning .due_date, .gt_warning .id{
  background-color:#FF9000;
 }
 
-.problematic{
+.gt_problematic .due_date, .gt_problematic .id{
  background-color:#FFCC00;
 }
 
-.ok {
+.gt_ok .due_date, .gt_ok .id{
  background-color:#CFFF00;
 }
 
-.fine{
+.gt_fine .due_date, .gt_fine .id{
  background-color:#99FF00;
 }
