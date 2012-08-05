@@ -11,7 +11,7 @@ Redmine::Plugin.register :greentube do
   url 'https://github.com/greentube/redmine'
   author_url 'https://github.com/greentube/redmine'
   requires_redmine :version_or_higher => '2.0.0'
-  menu :top_menu, :polls, { :controller => 'issues', :assigned_to_id => 'me', :set_filter => 1, :sort => 'priority:desc,updated_on:desc'}, :caption => 'My Issues'
+  menu :top_menu, :polls, { :controller => 'issues', :assigned_to_id => 'me', :set_filter => 1, :sort => 'priority:desc,updated_on:desc'}, :caption => :label_my_issues
 end
 
 BusinessTime::Config.beginning_of_workday = "10:00 am"
