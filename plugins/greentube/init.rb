@@ -2,6 +2,7 @@ require 'redmine'
 require 'issue_colors_patch'
 require 'relative_time_patch'
 require 'due_date_nil_sorting'
+require 'dependent_projects_patch'
 
 Redmine::Plugin.register :greentube do
   name 'Greentube plugin'
