@@ -3,10 +3,9 @@ deploy:
     production:
       name: greentube-redmine
       backup: false
-setup:
-  commands:
 test:
   commands:
+  - echo TEST
 id: fe90afb0-d347-012f-cd30-123138094c0e
 ruby_versions:
 - 1.9.2
