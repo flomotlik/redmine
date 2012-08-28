@@ -1,10 +1,12 @@
----
 deploy:
   heroku:
     production:
       name: greentube-redmine
+      backup: false
 setup:
   commands:
 test:
   commands:
-id: 5b40ee80-cf82-012f-7c4f-1231392815c4
+id: fe90afb0-d347-012f-cd30-123138094c0e
+ruby_versions:
+- 1.9.2
