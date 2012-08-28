@@ -3,4 +3,8 @@ deploy:
   heroku:
     production:
       name: greentube-redmine
+setup:
+  commands:
+test:
+  commands:
 id: 5b40ee80-cf82-012f-7c4f-1231392815c4
