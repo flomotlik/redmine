@@ -16,6 +16,7 @@ en:
   field_issue: Ticket
   field_issue_to: Related ticket
   field_issues_visibility: Tickets visibility
+  field_workdays_left: Workdays left
   setting_issues_export_limit: Tickets export limit
   setting_cross_project_issue_relations: Allow cross-project ticket relations
   setting_issue_list_default_columns: Default columns displayed on the ticket list
