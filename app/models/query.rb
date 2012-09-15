@@ -231,7 +231,8 @@ class Query < ActiveRecord::Base
                            "start_date" => { :type => :date, :order => 11 },
                            "due_date" => { :type => :date, :order => 12 },
                            "estimated_hours" => { :type => :float, :order => 13 },
-                           "done_ratio" =>  { :type => :integer, :order => 14 }}
+                           "done_ratio" =>  { :type => :integer, :order => 14 },
+                           "description" => { :type => :text, :order => 15 }}
 
     principals = []
     if project
