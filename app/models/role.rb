@@ -36,7 +36,8 @@ class Role < ActiveRecord::Base
   ISSUES_VISIBILITY_OPTIONS = [
     ['all', :label_issues_visibility_all],
     ['default', :label_issues_visibility_public],
-    ['own', :label_issues_visibility_own]
+    ['own', :label_issues_visibility_own],
+    ['own_and_watcher', :label_issues_visibility_own_and_watcher]
   ]
 
   scope :sorted, order("#{table_name}.builtin ASC, #{table_name}.position ASC")

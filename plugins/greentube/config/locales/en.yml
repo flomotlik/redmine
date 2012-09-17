@@ -60,6 +60,7 @@ en:
   label_issues_visibility_all: All tickets
   label_issues_visibility_public: All non private tickets
   label_issues_visibility_own: Tickets created by or assigned to the user
+  label_issues_visibility_own_and_watcher: Tickets created by, assigned to the user or is a watcher
   text_tip_issue_begin_day: ticket beginning this day
   text_tip_issue_end_day: ticket ending this day
   text_tip_issue_begin_end_day: ticket beginning and ending this day
