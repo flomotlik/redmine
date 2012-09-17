@@ -17,6 +17,7 @@ en:
   field_issue_to: Related ticket
   field_issues_visibility: Tickets visibility
   field_workdays_left: Workdays left
+  field_new_default_ticket_data: Default Ticket Data
   setting_issues_export_limit: Tickets export limit
   setting_cross_project_issue_relations: Allow cross-project ticket relations
   setting_issue_list_default_columns: Default columns displayed on the ticket list
@@ -38,6 +39,7 @@ en:
   project_module_issue_tracking: Ticket tracking
   label_issue: Ticket
   label_issue_new: New ticket
+  label_issue_new_default: New default ticket
   label_issue_plural: Tickets
   label_issue_view_all: View all tickets
   label_issues_by: "Tickets by %{value}"

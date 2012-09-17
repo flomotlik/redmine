@@ -99,7 +99,7 @@ module Redmine
         else
           caption, url, selected = extract_node_details(node, project)
           return content_tag('li',
-                               render_single_menu_node(node, caption, url, selected))
+                               render_single_menu_node(node, caption, url_for(url) + "?#{node.dynamic_get ? node.dynamic_get.call(project).to_s : ''}", selected))
         end
       end
 
@@ -389,7 +389,7 @@ module Redmine
 
     class MenuItem < MenuNode
       include Redmine::I18n
-      attr_reader :name, :url, :param, :condition, :parent, :child_menus, :last
+      attr_reader :name, :url, :param, :condition, :parent, :child_menus, :last, :dynamic_get
 
       def initialize(name, url, options)
         raise ArgumentError, "Invalid option :if for menu item '#{name}'" if options[:if] && !options[:if].respond_to?(:call)
@@ -400,6 +400,7 @@ module Redmine
         @url = url
         @condition = options[:if]
         @param = options[:param] || :id
+        @dynamic_get = options[:dynamic_get]
         @caption = options[:caption]
         @html_options = options[:html] || {}
         # Adds a unique class to each menu item based on its name
