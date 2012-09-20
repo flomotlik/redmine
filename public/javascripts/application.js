@@ -10,6 +10,7 @@ function checkAll(id, checked) {
 }
 
 function toggleCheckboxesBySelector(selector) {
+  boxes = $$(selector);
   var all_checked = true;
   $(selector).each(function(index) {
     if (!$(this).is(':checked')) { all_checked = false; }
@@ -194,11 +195,26 @@ function toggleFilter(field) {
   var fieldId = field.replace('.', '_');
   if ($('#cb_' + fieldId).is(':checked')) {
     $("#operators_" + fieldId).show().removeAttr('disabled');
+    Element.show("operators_" + field);
+    Element.show("connectors_" + field);
+    Form.Element.enable("operators_" + field);
+    Form.Element.enable("connectors_" + field);
     toggleOperator(field);
   } else {
     $("#operators_" + fieldId).hide().attr('disabled', true);
+    Element.hide("operators_" + field);
+    Element.hide("connectors_" + field);
+    Form.Element.disable("operators_" + field);
+    Form.Element.disable("connectors_" + field);
     enableValues(field, []);
   }
+  hide_last_visible_connector();
+}
+
+function hide_last_visible_connector(){
+  filters = $$(".filter").findAll(function(el) { return el.visible() && el.down('.field input').checked})
+  filters.each(function(el){el.down('.connector select').show()});
+  if (filters.size() > 0) {filters.last().down('.connector select').hide();};
 }
 
 function enableValues(field, indexes) {

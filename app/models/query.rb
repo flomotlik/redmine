@@ -377,6 +377,10 @@ class Query < ActiveRecord::Base
     has_filter?(field) ? filters[field][:operator] : nil
   end
 
+  def connector_for(field)
+    has_filter?(field) ? filters[field][:connector] : nil
+  end
+
   def values_for(field)
     has_filter?(field) ? filters[field][:values] : nil
   end
@@ -555,6 +559,7 @@ class Query < ActiveRecord::Base
       v = values_for(field).clone
       next unless v and !v.empty?
       operator = operator_for(field)
+      connector = connector_for(field)
 
       # "me" value subsitution
       if %w(assigned_to_id author_id watcher_id).include?(field)
@@ -584,12 +589,12 @@ class Query < ActiveRecord::Base
         # regular field
         filters_clauses << '(' + sql_for_field(field, operator, v, Issue.table_name, field) + ')'
       end
+      filters_clauses << connector
     end if filters and valid?
-
-    filters_clauses << project_statement
+    filters_clauses.pop
     filters_clauses.reject!(&:blank?)
-
-    filters_clauses.any? ? filters_clauses.join(' AND ') : nil
+    statement = [filters_clauses.join(' '), project_statement].reject(&:blank?).join(" AND ")
+    statement.empty? ? nil : statement
   end
 
   # Returns the issue count

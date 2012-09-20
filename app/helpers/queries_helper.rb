@@ -40,7 +40,7 @@ module QueriesHelper
       column_value(column, issue, value)
     end
   end
-  
+
   def column_value(column, issue, value)
     case value.class.name
     when 'String'
@@ -122,7 +122,7 @@ module QueriesHelper
   def build_query_from_params
     if params[:fields] || params[:f]
       @query.filters = {}
-      @query.add_filters(params[:fields] || params[:f], params[:operators] || params[:op], params[:values] || params[:v])
+      @query.add_filters(params[:fields] || params[:f], params[:operators] || params[:op], params[:values] || params[:v], params[:connectors] || params[:cn])
     else
       @query.available_filters.keys.each do |field|
         @query.add_short_filter(field, params[field]) if params[field]
