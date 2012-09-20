@@ -589,7 +589,7 @@ class Query < ActiveRecord::Base
         # regular field
         filters_clauses << '(' + sql_for_field(field, operator, v, Issue.table_name, field) + ')'
       end
-      filters_clauses << connector
+      filters_clauses << (connector || 'AND')
     end if filters and valid?
     filters_clauses.pop
     filters_clauses.reject!(&:blank?)
