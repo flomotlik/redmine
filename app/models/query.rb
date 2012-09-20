@@ -332,7 +332,7 @@ class Query < ActiveRecord::Base
     json
   end
 
-  def add_filter(field, operator, values)
+  def add_filter(field, operator, values, connector)
     # values must be an array
     return unless values.nil? || values.is_a?(Array)
     # check if field is defined as an available filter
@@ -343,7 +343,7 @@ class Query < ActiveRecord::Base
       #  allowed_values = values & ([""] + (filter_options[:values] || []).collect {|val| val[1]})
       #  filters[field] = {:operator => operator, :values => allowed_values } if (allowed_values.first and !allowed_values.first.empty?) or ["o", "c", "!*", "*", "t"].include? operator
       #end
-      filters[field] = {:operator => operator, :values => (values || [''])}
+      filters[field] = {:operator => operator, :values => (values || ['']), :connector => connector}
     end
   end
 
@@ -357,10 +357,10 @@ class Query < ActiveRecord::Base
   end
 
   # Add multiple filters using +add_filter+
-  def add_filters(fields, operators, values)
-    if fields.is_a?(Array) && operators.is_a?(Hash) && (values.nil? || values.is_a?(Hash))
+  def add_filters(fields, operators, values, connectors)
+    if fields.is_a?(Array) && operators.is_a?(Hash) && (values.nil? || values.is_a?(Hash)) && connectors.is_a?(Hash)
       fields.each do |field|
-        add_filter(field, operators[field], values && values[field])
+        add_filter(field, operators[field], values && values[field], connectors[field])
       end
     end
   end
