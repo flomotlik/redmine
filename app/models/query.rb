@@ -887,7 +887,7 @@ class Query < ActiveRecord::Base
         options = { :type => :integer, :order => 20 }
       when "float"
         options = { :type => :float, :order => 20 }
-      when "user", "version"
+      when "user", "version", 'project'
         next unless project
         values = field.possible_values_options(project)
         if User.current.logged? && field.field_format == 'user'

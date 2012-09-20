@@ -34,7 +34,7 @@ class CustomField < ActiveRecord::Base
     # make sure these fields are not searchable
     self.searchable = false if %w(int float date bool).include?(field_format)
     # make sure only these fields can have multiple values
-    self.multiple = false unless %w(list user version).include?(field_format)
+    self.multiple = false unless %w(list user version project).include?(field_format)
     true
   end
 
@@ -59,13 +59,15 @@ class CustomField < ActiveRecord::Base
 
   def possible_values_options(obj=nil)
     case field_format
-    when 'user', 'version'
+    when 'user', 'version', 'project'
       if obj.respond_to?(:project) && obj.project
         case field_format
         when 'user'
           obj.project.users.sort.collect {|u| [u.to_s, u.id.to_s]}
         when 'version'
           obj.project.shared_versions.sort.collect {|u| [u.to_s, u.id.to_s]}
+        when 'project'
+          Project.visible.collect{|p| [p.to_s, p.id.to_s]}
         end
       elsif obj.is_a?(Array)
         obj.collect {|o| possible_values_options(o)}.reduce(:&)
@@ -81,7 +83,7 @@ class CustomField < ActiveRecord::Base
 
   def possible_values(obj=nil)
     case field_format
-    when 'user', 'version'
+    when 'user', 'version', 'project'
       possible_values_options(obj).collect(&:last)
     when 'bool'
       ['1', '0']
@@ -119,7 +121,7 @@ class CustomField < ActiveRecord::Base
         casted = value.to_i
       when 'float'
         casted = value.to_f
-      when 'user', 'version'
+      when 'user', 'version', 'project'
         casted = (value.blank? ? nil : field_format.classify.constantize.find_by_id(value.to_i))
       end
     end
