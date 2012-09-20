@@ -25,12 +25,25 @@
                        wiki_page_options_for_select(@wiki.pages.all(:include => :parent) -
                          @page.self_and_descendants, @page.parent) %>
     </p>
+    <% unless @wiki.project.members.empty? %>
+    <p id="access_ids">
+      <label><%= l(:field_access_ids) %></label>
+      <input name="wiki_page[access_ids][]" type="hidden" value="">
+      <% @wiki.project.members.each do |m| %>
+        <span>
+          <%= check_box_tag 'wiki_page[access_ids][]', m.id, @page.access_ids.include?(m.id.to_s), :id => "access_#{m.id}" %><label for="<%= "access_#{m.id}" %>"><%= m.name %></label>
+        </span>
+      <% end %>
+      </p>
+    <% end %>
   <% end %>
 <% end %>
 
 <p><label><%= l(:field_comments) %></label><%= f.text_field :comments, :size => 120 %></p>
 <p><label><%=l(:label_attachment_plural)%></label><%= render :partial => 'attachments/form' %></p>
+
 </div>
+
 
 <p><%= submit_tag l(:button_save) %>
    <%= preview_link({:controller => 'wiki', :action => 'preview', :project_id => @project, :id => @page.title }, 'wiki_form') %></p>

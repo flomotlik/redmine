@@ -23,3 +23,12 @@
 .gt_fine .due_date, .gt_fine .id{
  background-color:#99FF00;
 }
+
+#access_ids span{
+  display:block;
+}
+#access_ids span label{
+  display:inline;
+  float:none;
+  margin:0;
+}

@@ -47,6 +47,7 @@ class WikiPage < ActiveRecord::Base
   validate :validate_parent_title
   before_destroy :remove_redirects
   before_save    :handle_redirects
+  before_save    :clean_access_ids
 
   # eager load information about last updates, without loading text
   scope :with_updated_on, {
@@ -57,8 +58,11 @@ class WikiPage < ActiveRecord::Base
   # Wiki pages that are protected by default
   DEFAULT_PROTECTED_PAGES = %w(sidebar)
 
+  serialize :access_ids
+
   safe_attributes 'parent_id',
     :if => lambda {|page, user| page.new_record? || user.allowed_to?(:rename_wiki_pages, page.project)}
+  safe_attributes 'access_ids'
 
   def initialize(attributes=nil, *args)
     super

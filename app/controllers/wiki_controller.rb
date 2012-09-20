@@ -56,6 +56,11 @@ class WikiController < ApplicationController
 
   # display a page (in editing mode if it doesn't exist)
   def show
+    unless User.current.admin || @page.access_ids.empty? || @page.access_ids.collect(&:to_i).compact.include?(User.current.id)
+      redirect_to @project
+      flash[:alert] = t(:wiki_no_access)
+      return
+    end
     if @page.new_record?
       if User.current.allowed_to?(:edit_wiki_pages, @project) && editable?
         edit
@@ -120,6 +125,7 @@ class WikiController < ApplicationController
 
   # Creates a new page or updates an existing one
   def update
+    puts params
     return render_403 unless editable?
     @page.content = WikiContent.new(:page => @page) if @page.new_record?
     @page.safe_attributes = params[:wiki_page]

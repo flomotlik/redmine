@@ -3,6 +3,7 @@ en:
     errors:
       messages:
         cant_link_an_issue_with_a_descendant: "A ticket cannot be linked to one of its subtasks"
+  wiki_no_access: You do not have access to this Wiki Page
   notice_failed_to_save_issues: "Failed to save %{count} ticket(s) on %{total} selected: %{ids}."
   notice_no_issue_selected: "No ticket is selected! Please, check the tickets you want to edit."
   notice_issue_done_ratios_updated: Ticket done ratios updated.
@@ -13,6 +14,7 @@ en:
   error_can_not_reopen_issue_on_closed_version: 'A ticket assigned to a closed version cannot be reopened'
   error_issue_done_ratios_not_updated: "Ticket done ratios not updated."
   error_unable_delete_issue_status: 'Unable to delete ticket status'
+  field_access_ids: Project Members with Access
   field_issue: Ticket
   field_issue_to: Related ticket
   field_issues_visibility: Tickets visibility
