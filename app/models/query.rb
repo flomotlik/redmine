@@ -333,7 +333,7 @@ class Query < ActiveRecord::Base
     json
   end
 
-  def add_filter(field, operator, values, connector)
+  def add_filter(field, operator, values, connector = "AND")
     # values must be an array
     return unless values.nil? || values.is_a?(Array)
     # check if field is defined as an available filter
