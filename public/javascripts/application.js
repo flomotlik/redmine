@@ -97,13 +97,13 @@ function initFilters(){
   });
 }
 
-function addFilter(field, operator, values) {
+function addFilter(field, operator, values, connector) {
   var fieldId = field.replace('.', '_');
   var tr = $('#tr_'+fieldId);
   if (tr.length > 0) {
     tr.show();
   } else {
-    buildFilterRow(field, operator, values);
+    buildFilterRow(field, operator, values, connector);
   }
   $('#cb_'+fieldId).attr('checked', true);
   toggleFilter(field);
@@ -114,7 +114,7 @@ function addFilter(field, operator, values) {
   });
 }
 
-function buildFilterRow(field, operator, values) {
+function buildFilterRow(field, operator, values, connector) {
   var fieldId = field.replace('.', '_');
   var filterTable = $("#filters-table");
   var filterOptions = availableFilters[field];
@@ -125,7 +125,9 @@ function buildFilterRow(field, operator, values) {
   var tr = $('<tr class="filter">').attr('id', 'tr_'+fieldId).html(
     '<td class="field"><input checked="checked" id="cb_'+fieldId+'" name="f[]" value="'+field+'" type="checkbox"><label for="cb_'+fieldId+'"> '+filterOptions['name']+'</label></td>' +
     '<td class="operator"><select id="operators_'+fieldId+'" name="op['+field+']"></td>' +
-    '<td class="values"></td>'
+    '<td class="values"></td>' +
+    '<td class="connector"><select id="connectors_' + fieldId + '" name="cn[' + fieldId + ']" style="">'+
+    $.map(['AND', 'OR'],function(item){return '<option value="' + item + '"' + (item == connector ? ' selected="selected"' : '') +  '>' + item + '</option>'}).join('')
   );
   filterTable.append(tr);
 
@@ -195,26 +197,20 @@ function toggleFilter(field) {
   var fieldId = field.replace('.', '_');
   if ($('#cb_' + fieldId).is(':checked')) {
     $("#operators_" + fieldId).show().removeAttr('disabled');
-    Element.show("operators_" + field);
-    Element.show("connectors_" + field);
-    Form.Element.enable("operators_" + field);
-    Form.Element.enable("connectors_" + field);
+    $("#connectors_" + fieldId).show().removeAttr('disabled');
     toggleOperator(field);
   } else {
     $("#operators_" + fieldId).hide().attr('disabled', true);
-    Element.hide("operators_" + field);
-    Element.hide("connectors_" + field);
-    Form.Element.disable("operators_" + field);
-    Form.Element.disable("connectors_" + field);
+    $("#connectors_" + fieldId).hide().attr('disabled', true);
     enableValues(field, []);
   }
   hide_last_visible_connector();
 }
 
 function hide_last_visible_connector(){
-  filters = $$(".filter").findAll(function(el) { return el.visible() && el.down('.field input').checked})
-  filters.each(function(el){el.down('.connector select').show()});
-  if (filters.size() > 0) {filters.last().down('.connector select').hide();};
+  connectors = $('.filter').has('.field input:checked').children('.connector');
+  connectors.each(function(){$(this).show()});
+  connectors.last().hide();
 }
 
 function enableValues(field, indexes) {
