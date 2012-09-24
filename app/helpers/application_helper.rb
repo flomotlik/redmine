@@ -1088,7 +1088,7 @@ module ApplicationHelper
 
   def calendar_for(field_id)
     include_calendar_headers_tags
-    javascript_tag("$(function() { $('##{field_id}').datepicker(datepickerOptions); });")
+    javascript_tag("$(function() { $('##{field_id}').datetimepicker(datepickerOptions); });")
   end
 
   def include_calendar_headers_tags
@@ -1102,8 +1102,8 @@ module ApplicationHelper
         start_of_week = start_of_week.to_i % 7
 
         tags = javascript_tag(
-                   "var datepickerOptions={dateFormat: 'yy-mm-dd', firstDay: #{start_of_week}, " +
-                     "showOn: 'button', buttonImageOnly: true, buttonImage: '" + 
+                   "var datepickerOptions={dateFormat: 'yy-mm-dd',timeFormat: 'hh:mm',firstDay: #{start_of_week}, " +
+                     "showOn: 'button', buttonImageOnly: true, buttonImage: '" +
                      path_to_image('/images/calendar.png') +
                      "', showButtonPanel: true};")
         jquery_locale = l('jquery.locale', :default => current_language.to_s)

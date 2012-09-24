@@ -1,4 +1,14 @@
 en:
+  date:
+    formats:
+      # Use the strftime parameters for formats.
+      # When no format has been given, it uses default.
+      # You can provide other formats here if you like!
+      default: "%m/%d/%Y - %H:%M"
+      inline: "%Y-%m-%d %H:%M"
+      short: "%b %d"
+      long: "%B %d, %Y"
+
   activerecord:
     errors:
       messages:

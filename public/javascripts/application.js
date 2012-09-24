@@ -170,8 +170,8 @@ function buildFilterRow(field, operator, values, connector) {
       ' <span style="display:none;"><input type="text" name="v['+field+'][]" id="values_'+fieldId+'_2" size="10" class="value date_value" value="'+values[1]+'" /></span>' +
       ' <span style="display:none;"><input type="text" name="v['+field+'][]" id="values_'+fieldId+'" size="3" class="value" value="'+values[0]+'" /> '+labelDayPlural+'</span>'
     );
-    $('#values_'+fieldId+'_1').val(values[0]).datepicker(datepickerOptions);
-    $('#values_'+fieldId+'_2').val(values[1]).datepicker(datepickerOptions);
+    $('#values_'+fieldId+'_1').val(values[0]).datetimepicker(datepickerOptions);
+    $('#values_'+fieldId+'_2').val(values[1]).datetimepicker(datepickerOptions);
     $('#values_'+fieldId).val(values[0]);
     break;
   case "string":

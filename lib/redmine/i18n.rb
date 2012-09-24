@@ -40,7 +40,7 @@ module Redmine
       options = {}
       options[:format] = Setting.date_format unless Setting.date_format.blank?
       options[:locale] = User.current.language unless User.current.language.blank?
-      ::I18n.l(date.to_date, options)
+      ::I18n.l(date, options)
     end
 
     def format_time(time, include_date = true)
