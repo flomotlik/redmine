@@ -1,5 +1,7 @@
 source 'http://rubygems.org'
 
+ruby '1.9.3'
+
 gem 'rails', '3.2.8'
 gem "jquery-rails", "~> 2.0.2"
 gem "i18n", "~> 0.6.0"
