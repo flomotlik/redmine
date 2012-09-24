@@ -8,8 +8,6 @@ module WikiPageVisibilityPatch
 
   module InstanceMethods
     def visible_with_access_list?
-      puts 'Baaaaaaaaaaaaam'
-      binding.pry
       visible_without_access_list?
     end
 
