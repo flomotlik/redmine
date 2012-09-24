@@ -55,7 +55,7 @@
   end
 
   # Width of the entire chart
-  g_width = ((@gantt.date_to - @gantt.date_from + 1) * zoom).to_i
+  g_width = ((@gantt.date_to.to_date - @gantt.date_from.to_date + 1) * zoom).to_i
   @gantt.render(:top => headers_height + 8,
                 :zoom => zoom,
                 :g_width => g_width,
