@@ -2,7 +2,7 @@ deploy:
   heroku:
     production:
       name: greentube-redmine
-      branch: greentube
+      branch: greentube-master
       backup: false
 test:
   commands:
