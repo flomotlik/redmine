@@ -32,9 +32,10 @@ module Redmine
         # Returns an array of users that are proposed as watchers
         def addable_watcher_users
           users = self.project.users.sort - self.watcher_users
-          if respond_to?(:visible?)
-            users.reject! {|user| !visible?(user)}
-          end
+          #DO NOT REMOVE USERS FROM WATCHER LIST
+          #if respond_to?(:visible?)
+          #  users.reject! {|user| !visible?(user)}
+          #end
           users
         end
 

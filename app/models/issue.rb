@@ -101,6 +101,9 @@ class Issue < ActiveRecord::Base
         else
           '1=0'
         end
+      when 'own_and_watcher'
+        user_ids = [user.id] + user.groups.map(&:id)
+        "(#{table_name}.author_id = #{user.id} OR #{table_name}.assigned_to_id IN (#{user_ids.join(',')})) OR (SELECT count(*) from watchers where watchers.watchable_type = 'Issue' AND watchers.watchable_id = #{table_name}.id AND watchers.user_id = #{user.id} ) > 0"
       else
         '1=0'
       end
@@ -117,6 +120,8 @@ class Issue < ActiveRecord::Base
         !self.is_private? || (user.logged? && (self.author == user || user.is_or_belongs_to?(assigned_to)))
       when 'own'
         user.logged? && (self.author == user || user.is_or_belongs_to?(assigned_to))
+      when 'own_and_watcher'
+        self.author == user || user.is_or_belongs_to?(assigned_to) || self.watcher_user_ids.include?(user.id)
       else
         false
       end
