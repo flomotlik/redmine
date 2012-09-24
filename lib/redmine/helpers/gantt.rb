@@ -265,7 +265,7 @@ module Redmine
         if project.is_a?(Project) && project.start_date && project.due_date
           options[:zoom] ||= 1
           options[:g_width] ||= (self.date_to - self.date_from + 1) * options[:zoom]
-          coords = coordinates(project.start_date, project.due_date, nil, options[:zoom])
+          coords = coordinates(project.start_date.to_date, project.due_date.to_date, nil, options[:zoom])
           label = h(project)
           case options[:format]
           when :html
@@ -363,7 +363,7 @@ module Redmine
       def line_for_issue(issue, options)
         # Skip issues that don't have a due_before (due_date or version's due_date)
         if issue.is_a?(Issue) && issue.due_before
-          coords = coordinates(issue.start_date, issue.due_before, issue.done_ratio, options[:zoom])
+          coords = coordinates(issue.start_date.to_date, issue.due_before.to_date, issue.done_ratio, options[:zoom])
           label = "#{issue.status.name} #{issue.done_ratio}%"
           case options[:format]
           when :html
