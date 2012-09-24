@@ -1,4 +1,4 @@
 source "http://rubygems.org"
 
 gem 'business_time', :require => 'business_time'
-gem 'holidays', :require => 'holidays'
+gem 'holidays','1.0.3', :require => 'holidays'
