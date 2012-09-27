@@ -14,7 +14,7 @@ module IssueColorsPatch
       # Dividing by 3600 as business_time_until gives back the time in seconds
       css_classes_without_deadline_colors.tap do |classes|
         classes << ' gt_' + if due_date && estimated_hours
-          working_hours_left = Time.now.business_time_until(due_date.to_time+1.day)/3600
+          working_hours_left = Time.now.business_time_until(due_date+1.day)/3600
           critical = estimated_hours*1.5
           warning = estimated_hours*2
           problematic = estimated_hours*3
@@ -29,7 +29,7 @@ module IssueColorsPatch
             else "fine"
           end
         elsif due_date
-          Date.today.business_days_until(due_date) <= 5 ?  'warning' : ''
+          Time.now.utc.business_time_until(due_date.utc) <= 5 ?  'warning' : ''
         else
           ''
         end
