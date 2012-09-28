@@ -42,16 +42,16 @@
 
 <div class="splitcontentright">
 <% if @issue.safe_attribute? 'parent_issue_id' %>
-<p id="parent_issue"><%= f.text_field :parent_issue_id, :size => 12, :required => @issue.required_attribute?('parent_issue_id') %></p>
+<p id="parent_issue"><%= f.text_field :parent_issue_id, :size => 14, :required => @issue.required_attribute?('parent_issue_id') %></p>
 <%= javascript_tag "observeAutocompleteField('issue_parent_issue_id', '#{escape_javascript auto_complete_issues_path(:project_id => @issue.project)}')" %>
 <% end %>
 
 <% if @issue.safe_attribute? 'start_date' %>
-<p><%= f.text_field :start_date, :size => 12, :disabled => !@issue.leaf?, :required => @issue.required_attribute?('start_date'), :value => @issue.start_date.try(:strftime,(t('date.formats.inline'))) %><%= calendar_for('issue_start_date') if @issue.leaf? %></p>
+<p><%= f.text_field :start_date, :size => 14, :disabled => !@issue.leaf?, :required => @issue.required_attribute?('start_date'), :value => @issue.start_date.try(:strftime,(t('date.formats.inline'))) %><%= calendar_for('issue_start_date') if @issue.leaf? %></p>
 <% end %>
 
 <% if @issue.safe_attribute? 'due_date' %>
-<p><%= f.text_field :due_date, :size => 12, :disabled => !@issue.leaf?, :required => @issue.required_attribute?('due_date'), :value => @issue.due_date.try(:strftime, (t('date.formats.inline'))) %><%= calendar_for('issue_due_date') if @issue.leaf? %></p>
+<p><%= f.text_field :due_date, :size => 14, :disabled => !@issue.leaf?, :required => @issue.required_attribute?('due_date'), :value => @issue.due_date.try(:strftime, (t('date.formats.inline'))) %><%= calendar_for('issue_due_date') if @issue.leaf? %></p>
 <% end %>
 
 <% if @issue.safe_attribute? 'estimated_hours' %>
