@@ -15,6 +15,10 @@
     <fieldset id="filters" class="collapsible <%= @query.new_record? ? "" : "collapsed" %>">
       <legend onclick="toggleFieldset(this);"><%= l(:label_filter_plural) %></legend>
       <div style="<%= @query.new_record? ? "" : "display: none;" %>">
+      <input id="search_box" name="f[]" value="search_box" type="hidden"/>
+      <input id="search_box" name="op[search_box]" value="!" type="hidden"/>
+      <label for="values_search_box"> Search:</label>
+      <input type="text" name="v[search_box][]" id="values_search_box" size="78" class="value" value="<%= @search_box_query %>"/>
         <%= render :partial => 'queries/filters', :locals => {:query => @query} %>
       </div>
     </fieldset>

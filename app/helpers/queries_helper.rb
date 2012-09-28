@@ -124,7 +124,7 @@ module QueriesHelper
       @query.filters = {}
       @query.add_filters(params[:fields] || params[:f], params[:operators] || params[:op], params[:values] || params[:v], params[:connectors] || params[:cn])
     else
-      @query.available_filters.keys.each do |field|
+      (@query.available_filters.keys << 'search_box').each do |field|
         @query.add_short_filter(field, params[field]) if params[field]
       end
     end

@@ -167,7 +167,7 @@ class Query < ActiveRecord::Base
   end
 
   def validate_query_filters
-    filters.each_key do |field|
+    filters.except('search_box').each_key do |field|
       if values_for(field)
         case type_for(field)
         when :integer
@@ -337,7 +337,7 @@ class Query < ActiveRecord::Base
     # values must be an array
     return unless values.nil? || values.is_a?(Array)
     # check if field is defined as an available filter
-    if available_filters.has_key? field
+    if available_filters.merge('search_box' => { :type => :text, :order => 20 }).has_key? field
       filter_options = available_filters[field]
       # check if operator is allowed for that filter
       #if @@operators_by_filter_type[filter_options[:type]].include? operator
@@ -583,6 +583,11 @@ class Query < ActiveRecord::Base
       if field =~ /cf_(\d+)$/
         # custom field
         filters_clauses << sql_for_custom_field(field, operator, v, $1)
+      elsif field == 'search_box'
+        filters_clauses << '(' +
+          ['subject', "#{Issue.table_name}.description", "#{Journal.table_name}.notes"].collect{
+            |col| "(#{col} LIKE '%#{connection.quote_string(value_for(field))}%')"
+        }.join(' OR ') + ')'
       elsif respond_to?("sql_for_#{field}_field")
         # specific statement
         filters_clauses << send("sql_for_#{field}_field", field, operator, v)
@@ -600,7 +605,7 @@ class Query < ActiveRecord::Base
 
   # Returns the issue count
   def issue_count
-    Issue.visible.count(:include => [:status, :project], :conditions => statement)
+    Issue.visible.count(:include => [:status, :project, :journals], :conditions => statement)
   rescue ::ActiveRecord::StatementInvalid => e
     raise StatementInvalid.new(e.message)
   end
@@ -611,7 +616,7 @@ class Query < ActiveRecord::Base
     if grouped?
       begin
         # Rails3 will raise an (unexpected) RecordNotFound if there's only a nil group value
-        r = Issue.visible.count(:group => group_by_statement, :include => [:status, :project], :conditions => statement)
+        r = Issue.visible.count(:group => group_by_statement, :include => [:status, :project, :journals], :conditions => statement)
       rescue ActiveRecord::RecordNotFound
         r = {nil => issue_count}
       end
@@ -631,7 +636,7 @@ class Query < ActiveRecord::Base
     order_option = [group_by_sort_order, options[:order]].reject {|s| s.blank?}.join(',')
     order_option = nil if order_option.blank?
 
-    issues = Issue.visible.scoped(:conditions => options[:conditions]).find :all, :include => ([:status, :project] + (options[:include] || [])).uniq,
+    issues = Issue.visible.scoped(:conditions => options[:conditions]).find :all, :include => ([:status, :project, :journals] + (options[:include] || [])).uniq,
                      :conditions => statement,
                      :order => order_option,
                      :joins => joins_for_order_statement(order_option),
@@ -651,7 +656,7 @@ class Query < ActiveRecord::Base
     order_option = [group_by_sort_order, options[:order]].reject {|s| s.blank?}.join(',')
     order_option = nil if order_option.blank?
 
-    Issue.visible.scoped(:conditions => options[:conditions]).scoped(:include => ([:status, :project] + (options[:include] || [])).uniq,
+    Issue.visible.scoped(:conditions => options[:conditions]).scoped(:include => ([:status, :project, :journals] + (options[:include] || [])).uniq,
                      :conditions => statement,
                      :order => order_option,
                      :joins => joins_for_order_statement(order_option),

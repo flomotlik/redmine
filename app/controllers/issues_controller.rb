@@ -77,6 +77,8 @@ class IssuesController < ApplicationController
                               :offset => @offset,
                               :limit => @limit)
       @issue_count_by_group = @query.issue_count_by_group
+      @search_box_query = @query.filters['search_box'].try(:[], :values).try(:join)
+      @query.filters.except!('search_box')
 
       respond_to do |format|
         format.html { render :template => 'issues/index', :layout => !request.xhr? }
