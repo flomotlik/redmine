@@ -1,0 +1,10 @@
+Um Greentube Redmine auf bestehenden Systemen aufzusetzen sollten nur
+
+* git clone git@github.com:Greentube/Redmine.git
+* git checkout greentube
+* git submodule update
+* bundle install
+* RAILS_ENV=production bundle exec rake db:migrate redmine:plugins:migrate
+
+
+notwendig sein.
