@@ -1,6 +1,6 @@
 [submodule "plugins/redmine_backlogs"]
 	path = plugins/redmine_backlogs
 	url = https://github.com/backlogs/redmine_backlogs.git
-[submodule "plugins/redmine_time_tracker"]
-	path = plugins/redmine_time_tracker
-	url = https://github.com/hicknhack-software/redmine_time_tracker.git
+#[submodule "plugins/redmine_time_tracker"]
+#	path = plugins/redmine_time_tracker
+#	url = https://github.com/hicknhack-software/redmine_time_tracker.git
