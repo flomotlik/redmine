@@ -50,7 +50,7 @@ module QueriesHelper
         h(value)
       end
     when 'Time'
-      format_time(value)
+      format_date(value)
     when 'Date'
       format_date(value)
     when 'Fixnum', 'Float'
