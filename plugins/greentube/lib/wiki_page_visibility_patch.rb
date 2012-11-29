@@ -12,7 +12,9 @@ module WikiPageVisibilityPatch
     end
 
     def clean_access_ids
-      access_ids.reject!{|a| a.empty?}
+      if access_ids
+        access_ids.reject!{|a| a.empty?}
+      end
     end
   end
 end

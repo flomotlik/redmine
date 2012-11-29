@@ -31,7 +31,7 @@
       <input name="wiki_page[access_ids][]" type="hidden" value="">
       <% @wiki.project.members.each do |m| %>
         <span>
-          <%= check_box_tag 'wiki_page[access_ids][]', m.id, @page.access_ids.include?(m.id.to_s), :id => "access_#{m.id}" %><label for="<%= "access_#{m.id}" %>"><%= m.name %></label>
+          <%= check_box_tag 'wiki_page[access_ids][]', m.id, (@page.access_ids ? @page.access_ids.include?(m.id.to_s) : []), :id => "access_#{m.id}" %><label for="<%= "access_#{m.id}" %>"><%= m.name %></label>
         </span>
       <% end %>
       </p>
