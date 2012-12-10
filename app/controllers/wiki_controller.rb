@@ -56,7 +56,7 @@ class WikiController < ApplicationController
 
   # display a page (in editing mode if it doesn't exist)
   def show
-    unless User.current.admin || @page.access_ids || page.access_ids.empty? || @page.access_ids.collect(&:to_i).compact.include?(User.current.id)
+    unless User.current.admin || @page.access_ids || @page.access_ids.empty? || @page.access_ids.collect(&:to_i).compact.include?(User.current.id)
       redirect_to @project
       flash[:alert] = t(:wiki_no_access)
       return
