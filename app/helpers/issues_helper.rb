@@ -248,8 +248,8 @@ module IssuesHelper
       label = l(("field_" + field).to_sym)
       case detail.prop_key
       when 'due_date', 'start_date'
-        value = format_date(detail.value.to_date) if detail.value
-        old_value = format_date(detail.old_value.to_date) if detail.old_value
+        value = format_date(detail.value.to_time) if detail.value
+        old_value = format_date(detail.old_value.to_time) if detail.old_value
 
       when 'project_id', 'status_id', 'tracker_id', 'assigned_to_id',
             'priority_id', 'category_id', 'fixed_version_id'
