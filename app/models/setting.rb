@@ -18,15 +18,15 @@
 class Setting < ActiveRecord::Base
 
   DATE_FORMATS = [
-	'%Y-%m-%d %H:%M',
-	'%d/%m/%Y %H:%M',
-	'%d.%m.%Y %H:%M',
-	'%d-%m-%Y %H:%M',
-	'%m/%d/%Y %H:%M',
-	'%d %b %Y %H:%M',
-	'%d %B %Y %H:%M',
-	'%b %d, %Y %H:%M',
-	'%B %d, %Y %H:%M'
+	'%Y-%m-%d',
+	'%d/%m/%Y',
+	'%d.%m.%Y',
+	'%d-%m-%Y',
+	'%m/%d/%Y',
+	'%d %b %Y',
+	'%d %B %Y',
+	'%b %d, %Y',
+	'%B %d, %Y'
     ]
 
   TIME_FORMATS = [

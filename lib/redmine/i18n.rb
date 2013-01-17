@@ -54,6 +54,10 @@ module Redmine
       (include_date ? "#{format_date(local)} " : "") + ::I18n.l(local, options)
     end
 
+    def format_date_time time
+      "#{format_time(time)}"
+    end
+
     def day_name(day)
       ::I18n.t('date.day_names')[day % 7]
     end
