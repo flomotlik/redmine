@@ -50,9 +50,9 @@ module QueriesHelper
         h(value)
       end
     when 'Time'
-      format_date(value)
+      format_date_time(value)
     when 'Date'
-      format_date(value)
+      format_date_time(value)
     when 'Fixnum', 'Float'
       if column.name == :done_ratio
         progress_bar(value, :width => '80px')

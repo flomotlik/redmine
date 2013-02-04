@@ -51,8 +51,8 @@ module IssuesHelper
     link_to_issue(issue) + "<br /><br />".html_safe +
       "<strong>#{@cached_label_project}</strong>: #{link_to_project(issue.project)}<br />".html_safe +
       "<strong>#{@cached_label_status}</strong>: #{h(issue.status.name)}<br />".html_safe +
-      "<strong>#{@cached_label_start_date}</strong>: #{format_date(issue.start_date)}<br />".html_safe +
-      "<strong>#{@cached_label_due_date}</strong>: #{format_date(issue.due_date)}<br />".html_safe +
+      "<strong>#{@cached_label_start_date}</strong>: #{format_date_time(issue.start_date)}<br />".html_safe +
+      "<strong>#{@cached_label_due_date}</strong>: #{format_date_time(issue.due_date)}<br />".html_safe +
       "<strong>#{@cached_label_assigned_to}</strong>: #{h(issue.assigned_to)}<br />".html_safe +
       "<strong>#{@cached_label_priority}</strong>: #{h(issue.priority.name)}".html_safe
   end
