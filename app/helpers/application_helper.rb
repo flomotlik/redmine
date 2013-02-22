@@ -643,7 +643,7 @@ module ApplicationHelper
             else
               wiki_page_id = page.present? ? Wiki.titleize(page) : nil
               parent = wiki_page.nil? && obj.is_a?(WikiContent) && obj.page && project == link_project ? obj.page.title : nil
-              url_for(:only_path => only_path, :controller => 'wiki', :action => 'show', :project_id => link_project, 
+              url_for(:only_path => only_path, :controller => 'wiki', :action => 'show', :project_id => link_project,
                :id => wiki_page_id, :anchor => anchor, :parent => parent)
             end
           end
@@ -1005,7 +1005,7 @@ module ApplicationHelper
       html << "</ul></div>\n"
     end
     html.html_safe
-  end  
+  end
 
   def delete_link(url, options={})
     options = {
@@ -1019,8 +1019,8 @@ module ApplicationHelper
 
   def preview_link(url, form, target='preview', options={})
     content_tag 'a', l(:label_preview), {
-        :href => "#", 
-        :onclick => %|submitPreview("#{escape_javascript url_for(url)}", "#{escape_javascript form}", "#{escape_javascript target}"); return false;|, 
+        :href => "#",
+        :onclick => %|submitPreview("#{escape_javascript url_for(url)}", "#{escape_javascript form}", "#{escape_javascript target}"); return false;|,
         :accesskey => accesskey(:preview)
       }.merge(options)
   end
@@ -1088,7 +1088,7 @@ module ApplicationHelper
 
   def calendar_for(field_id)
     include_calendar_headers_tags
-    javascript_tag("$(function() { $('##{field_id}').datetimepicker(datepickerOptions); });")
+    javascript_tag("$(function() { $('##{field_id}').datepicker(datepickerOptions); });")
   end
 
   def include_calendar_headers_tags
@@ -1108,7 +1108,7 @@ module ApplicationHelper
                      "', showButtonPanel: true};")
         jquery_locale = l('jquery.locale', :default => current_language.to_s)
         unless jquery_locale == 'en'
-          tags << javascript_include_tag("i18n/jquery.ui.datepicker-#{jquery_locale}.js") 
+          tags << javascript_include_tag("i18n/jquery.ui.datepicker-#{jquery_locale}.js")
         end
         tags
       end

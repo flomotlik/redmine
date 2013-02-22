@@ -45,6 +45,8 @@ module Redmine
 
     def format_time(time, include_date = true)
       return nil unless time
+      #Hack so we don't have to change format_time to format_date everywhere in the codebase
+      return format_date(time) if time.class == Date
       options = {}
       options[:format] = (Setting.time_format.blank? ? :time : Setting.time_format)
       options[:locale] = User.current.language unless User.current.language.blank?
